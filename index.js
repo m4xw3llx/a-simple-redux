@@ -1,33 +1,43 @@
-// An object stored the 'count' value
-let state = {
-  count: 1
+const { Store } = require("./store.js");
+
+let initState = {
+  counter: {
+    count: 0
+  },
+  info: {
+    name: "",
+    description: ""
+  }
 };
 
-console.log(state.count);
+console.log("type of Store is: ", typeof Store);
 
-// An array to store the object subscribers
-let listeners = [];
+// create store
+const store = Store.createStore(initState);
 
-// Subscrib the object modification
-function subscribe(listener) {
-  listeners.push(listener);
-}
-
-// Test function
-// change the count to notificate the subscribers
-function changeCount(count) {
-  state.count = count;
-  for (let i = 0; i < listeners.length; i++) {
-    const listener = listeners[i];
-    listener();
-  }
-}
-
-// Tesc code
-subscribe(() => {
-  console.log(state.count);
+// subscribe store
+store.subscribe(() => {
+  let state = store.getState();
+  console.log(`${state.info.name}：${state.info.description}`);
 });
 
-changeCount(2);
-changeCount(3);
-changeCount(4);
+store.subscribe(() => {
+  let state = store.getState();
+  console.log(state.counter.count);
+});
+
+// change store state
+store.changeState({
+  ...store.getState(),
+  counter: {
+    count: 100
+  }
+});
+
+store.changeState({
+  ...store.getState(),
+  info: {
+    name: "xxx",
+    description: "nnn"
+  }
+});
