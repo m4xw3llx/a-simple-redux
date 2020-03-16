@@ -16,6 +16,12 @@ function counterReducer(state, action) {
         ...state,
         count: state.count - 1
       };
+    case "ADD": {
+      return {
+        ...state,
+        count: state.count + action.value
+      };
+    }
     default:
       return state;
   }
