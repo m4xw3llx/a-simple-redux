@@ -17,6 +17,7 @@ const createStoreRewrite = applyMiddleware.applyMiddleware(
 );
 
 const store = Store(combinedReducers, undefined, createStoreRewrite);
+store.replaceReducer(combinedReducers);
 
 const subscriber = () => {
   console.log("current state after edit is : ", store.getState());

@@ -34,13 +34,19 @@ const createStore = function(reducer, initState, createStoreRewrite) {
     }
   }
 
-  dispatch({ type: Symbol() });
+  function replaceReducer(nextReducer) {
+    reducer = nextReducer;
+    dispatch({ type: Symbol() });
+  }
+
+  // dispatch({ type: Symbol() });
 
   return {
     subscribe,
     unsubscribe,
     getState,
-    dispatch
+    dispatch,
+    replaceReducer
   };
 };
 
