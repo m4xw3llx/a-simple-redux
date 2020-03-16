@@ -1,4 +1,9 @@
-const createStore = function(reducer, initState) {
+const createStore = function(reducer, initState, createStoreRewrite) {
+  if (createStoreRewrite) {
+    const resultStore = createStoreRewrite(createStore);
+    return resultStore(reducer, initState);
+  }
+
   let state = initState;
   let listeners = [];
 
