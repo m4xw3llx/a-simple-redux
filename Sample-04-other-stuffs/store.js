@@ -1,4 +1,9 @@
 const createStore = function(reducer, initState, createStoreRewrite) {
+  if (typeof initState === "function") {
+    createStoreRewrite = initState;
+    initState = undefined;
+  }
+
   if (createStoreRewrite) {
     const resultStore = createStoreRewrite(createStore);
     return resultStore(reducer, initState);
