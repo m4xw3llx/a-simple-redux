@@ -23,15 +23,10 @@ const subscriber = () => {
 };
 
 store.subscribe(subscriber);
-store.unsubscribe(subscriber);
+// store.unsubscribe(subscriber);
 
-// MIDDLEWARE IMPLEMENT
-// Rewrite the dispatch of store
-
-// handle error middleware
-// store.dispatch =
 // TEST
-// store.dispatch({
-//   type: "CHANGE_NAME",
-//   value: "new name"
-// });
+store.dispatch({
+  type: "CHANGE_NAME",
+  value: "new name"
+});
